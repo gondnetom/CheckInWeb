@@ -30,42 +30,6 @@ class _MainPageState extends State<MainPage> {
 
   var ApplyTime = Map();
 
-  Future CheckInfo() async{
-    var list = Map();
-    var date = int.parse("${DateTime.now().year}${DateTime.now().month~/10 == 0 ? 0:""}${DateTime.now().month}${DateTime.now().day~/10 == 0 ? 0:""}${DateTime.now().day}");
-
-    await FirebaseFirestore.instance.collection("Users").doc(widget.SchoolName).collection("Users").doc(widget.uid).get().
-    then((DocumentSnapshot ds){
-      list['name'] = ds.get("Name");
-      list['number'] = ds.get("Number");
-      list['hour'] = ds.get("Hour");
-      list['date'] = ds.get("Date");
-      list['nowlocation'] = ds.get("NowLocation");
-
-      list["ApplyComment"] = ds.get("ApplyComment");
-      list["ApplyDate"] = ds.get("ApplyDate");
-      list["ApplyRoom"] = ds.get("ApplyRoom");
-      ApplyTime = ds.get("ApplyTime");
-
-      list["BackCheck"] = ds.get("BackCheck");
-      list["BackComment"] = ds.get("BackComment");
-    });
-
-    if(list['date']==date){
-      list['check'] = true;
-    }else{
-      list['check'] = false;
-    }
-
-    if(list['ApplyDate']==date){
-      list['ApplyCheck'] = true;
-    }else{
-      list['ApplyCheck'] = false;
-    }
-
-    return list;
-  }
-
   Future EarlyEnter() async{
     var date = int.parse("${DateTime.now().year}${DateTime.now().month~/10 == 0 ? 0:""}${DateTime.now().month}${DateTime.now().day~/10 == 0 ? 0:""}${DateTime.now().day}");
     var hour = DateTime.now().hour;
