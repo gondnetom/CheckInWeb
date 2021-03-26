@@ -237,7 +237,7 @@ class _MainPageState extends State<MainPage> {
                               ],
                             ),
                             SizedBox(height: 5,),
-                            Text("현재위치: ${widget.NetworkCheck}",style: TextStyle(fontSize: 20,color: Colors.white)),
+                            Text("와이파이상태: ${widget.NetworkCheck}",style: TextStyle(fontSize: 20,color: Colors.white)),
                             SizedBox(height: 5,),
                             Text("${documents["Number"]} ${documents["Name"]}",style: TextStyle(fontSize: 20,color: Colors.white)),
                           ],
@@ -284,7 +284,6 @@ class _MainPageState extends State<MainPage> {
                         onTap: (){
                           var hour = DateTime.now().hour;
                           print(hour);
-
                           if(!(hour>=18&&hour<=24)){
                             showTopSnackBar(
                               context,
@@ -322,7 +321,6 @@ class _MainPageState extends State<MainPage> {
                         onTap: (){
                           var hour = DateTime.now().hour;
                           print(hour);
-
                           if(!(hour>=18&&hour<=24)){
                             showTopSnackBar(
                               context,
@@ -334,7 +332,10 @@ class _MainPageState extends State<MainPage> {
                             return;
                           }
 
-                          SpecialCircumstance(widget.SchoolName,widget.uid);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SpecialCircumstance(widget.SchoolName,widget.uid)),
+                          );
                         },
                         child: Container(
                           margin: EdgeInsets.symmetric(vertical: 5,horizontal: 5),
