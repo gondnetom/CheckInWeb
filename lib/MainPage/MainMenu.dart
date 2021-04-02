@@ -203,7 +203,7 @@ class _MainPageState extends State<MainPage> {
                             SizedBox(height: 5,),
                             Text("와이파이상태: ${widget.NetworkCheck}",style: TextStyle(fontSize: 20,color: Colors.white)),
                             SizedBox(height: 5,),
-                            Text("${documents["Number"]} ${documents["Name"]}",style: TextStyle(fontSize: 20,color: Colors.white)),
+                            Text("${documents["Grade"]}${documents["Class"]}${documents["Number"]} ${documents["Name"]}",style: TextStyle(fontSize: 20,color: Colors.white)),
                           ],
                         ),
                       ),
