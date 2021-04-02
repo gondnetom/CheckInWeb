@@ -89,8 +89,11 @@ class _SpecialCircumstanceState extends State<SpecialCircumstance> {
                 ),
                 GestureDetector(
                   onTap: (){
-                    if(_tec.text == "조기입실"){
-                      _tec2.text = "잠이나 자!!!!";
+                    if(_tec.text == "조기입실") {
+                      _tec2.text = "공부나해!!!!";
+                      return;
+                    }else if(_tec.text == "이정서"){
+                      _tec2.text = "이 앱의 개발자";
                       return;
                     }
 
