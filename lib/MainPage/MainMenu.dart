@@ -128,12 +128,8 @@ class _MainPageState extends State<MainPage> {
     });
   }
   Future EarlyEnterCancle() async{
-    var date = int.parse("${DateTime.now().year}${DateTime.now().month~/10 == 0 ? 0:""}${DateTime.now().month}${DateTime.now().day~/10 == 0 ? 0:""}${DateTime.now().day}");
-    var hour = DateTime.now().hour;
-    var minute = DateTime.now().minute;
-
     await FirebaseFirestore.instance.collection("Users").doc(widget.SchoolName).collection("Users").doc(widget.uid).
-    update({"Date":date,"Hour":hour,"Minute":minute,"NowLocation":"조기입실","SpecialComment":""});
+    update({"Date":0,});
 
     setState(() {
     });
@@ -231,7 +227,7 @@ class _MainPageState extends State<MainPage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("${documents["Date"] == date && documents["NowLocation"] == "조기입실" ? "조기입실" : "조기입실 취소"}",style:TextStyle(fontSize: 30)),
+                              Text("${documents["Date"] == date && documents["NowLocation"] == "조기입실" ? "조기입실 취소" : "조기입실"}",style:TextStyle(fontSize: 30)),
                               Icon(CupertinoIcons.check_mark)
                             ],
                           ),
