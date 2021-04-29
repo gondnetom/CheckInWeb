@@ -19,124 +19,89 @@ class MainPage extends StatefulWidget {
 }
 class _MainPageState extends State<MainPage> {
   Stream currentStream;
-
-  String NowRoom = "자습실";
-  List<String> DetailName = ["자습실","201호실","202호실","203호실",
-    "204호실","205호실","301호실","302호실","303호실","304호실","305호실",
-    "401호실","402호실","403호실","404호실","405호실","501호실","502호실",
-    "503호실","504호실","505호실","물리실1","물리실2","화학실1","화학실2",
-    "생명실1","생명실2","지구과학실1","지구과학실2","천문대","도서실","음악실",
-    "NoteStation2","컴퓨터실1","컴퓨터실2"];
-
   var ApplyTime = Map();
 
-  Future EarlyEnter() async{
-    var date = int.parse("${DateTime.now().year}${DateTime.now().month~/10 == 0 ? 0:""}${DateTime.now().month}${DateTime.now().day~/10 == 0 ? 0:""}${DateTime.now().day}");
-    var hour = DateTime.now().hour;
-    var minute = DateTime.now().minute;
-
-    await FirebaseFirestore.instance.collection("Users").doc(widget.SchoolName).collection("Users").doc(widget.uid).
-    update({"Date":date,"Hour":hour,"Minute":minute,"NowLocation":"조기입실","SpecialComment":""});
-
-    setState(() {
-    });
-  }
-  showPicker() {
+  String NowRoom = "자습실";
+  List<String> GBSDetailName = ["자습실 or 교실","물리실1","물리실2","화학실1","화학실2",
+    "생명실1","생명실2","지구과학실1","지구과학실2","천문대","도서실","음악실",
+    "NoteStation2","컴퓨터실1","컴퓨터실2"];
+  GBSshowPicker() {
     showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                color: Color(0xffffffff),
-                border: Border(
-                  bottom: BorderSide(
-                    color: Color(0xff999999),
-                    width: 0.0,
+        context: context,
+        builder: (BuildContext context) {
+          return Column(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: Color(0xffffffff),
+                  border: Border(
+                    bottom: BorderSide(
+                      color: Color(0xff999999),
+                      width: 0.0,
+                    ),
                   ),
                 ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  CupertinoButton(
-                    child: Text('취소'),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                      vertical: 5.0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    CupertinoButton(
+                      child: Text('취소'),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 5.0,
+                      ),
                     ),
-                  ),
-                  CupertinoButton(
-                    child: Text('확인'),
-                    onPressed: () {
-                      CheckDetail(NowRoom);
-                      Navigator.pop(context);
-                    },
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                      vertical: 5.0,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Container(
-                height: 320.0,
-                color: Color(0xfff7f7f7),
-                child:CupertinoPicker(
-                  backgroundColor: Colors.white,
-                  onSelectedItemChanged: (value) {
-                    setState(() {
-                      NowRoom= DetailName[value];
-                    });
-                  },
-                  itemExtent: 32.0,
-                  children: const [
-                    Text("자습실"),
-                    Text("201호실"),
-                    Text("202호실"),
-                    Text("203호실"),
-                    Text("204호실"),
-                    Text("205호실"),
-                    Text("301호실"),
-                    Text("302호실"),
-                    Text("303호실"),
-                    Text("304호실"),
-                    Text("305호실"),
-                    Text("401호실"),
-                    Text("402호실"),
-                    Text("403호실"),
-                    Text("404호실"),
-                    Text("405호실"),
-                    Text("501호실"),
-                    Text("502호실"),
-                    Text("503호실"),
-                    Text("504호실"),
-                    Text("505호실"),
-                    Text("물리실1"),
-                    Text("물리실2"),
-                    Text("화학실1"),
-                    Text("화학실2"),
-                    Text("생명실1"),
-                    Text("생명실2"),
-                    Text("지구과학실1"),
-                    Text("지구과학실2"),
-                    Text("천문대"),
-                    Text("도서실"),
-                    Text("음악실"),
-                    Text("NoteStation2"),
-                    Text("컴퓨터실1"),
-                    Text("컴퓨터실2"),
+                    CupertinoButton(
+                      child: Text('확인'),
+                      onPressed: () {
+                        CheckDetail(NowRoom);
+                        Navigator.pop(context);
+                      },
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 5.0,
+                      ),
+                    )
                   ],
-                )
-            )
-          ],
-        );
-      });
+                ),
+              ),
+              Container(
+                  height: 320.0,
+                  color: Color(0xfff7f7f7),
+                  child:CupertinoPicker(
+                    backgroundColor: Colors.white,
+                    onSelectedItemChanged: (value) {
+                      setState(() {
+                        NowRoom= GBSDetailName[value];
+                      });
+                    },
+                    itemExtent: 32.0,
+                    children:
+                    const [
+                      Text("자습실 or 교실"),
+                      Text("물리실1"),
+                      Text("물리실2"),
+                      Text("화학실1"),
+                      Text("화학실2"),
+                      Text("생명실1"),
+                      Text("생명실2"),
+                      Text("지구과학실1"),
+                      Text("지구과학실2"),
+                      Text("천문대"),
+                      Text("도서실"),
+                      Text("음악실"),
+                      Text("NoteStation2"),
+                      Text("컴퓨터실1"),
+                      Text("컴퓨터실2"),
+                    ],
+                  )
+              )
+            ],
+          );
+        });
   }
   Future CheckDetail(String RoomName) async{
     var date = int.parse("${DateTime.now().year}${DateTime.now().month~/10 == 0 ? 0:""}${DateTime.now().month}${DateTime.now().day~/10 == 0 ? 0:""}${DateTime.now().day}");
@@ -149,6 +114,31 @@ class _MainPageState extends State<MainPage> {
     setState(() {
     });
   }
+
+
+  Future EarlyEnter() async{
+    var date = int.parse("${DateTime.now().year}${DateTime.now().month~/10 == 0 ? 0:""}${DateTime.now().month}${DateTime.now().day~/10 == 0 ? 0:""}${DateTime.now().day}");
+    var hour = DateTime.now().hour;
+    var minute = DateTime.now().minute;
+
+    await FirebaseFirestore.instance.collection("Users").doc(widget.SchoolName).collection("Users").doc(widget.uid).
+    update({"Date":date,"Hour":hour,"Minute":minute,"NowLocation":"조기입실","SpecialComment":""});
+
+    setState(() {
+    });
+  }
+  Future EarlyEnterCancle() async{
+    var date = int.parse("${DateTime.now().year}${DateTime.now().month~/10 == 0 ? 0:""}${DateTime.now().month}${DateTime.now().day~/10 == 0 ? 0:""}${DateTime.now().day}");
+    var hour = DateTime.now().hour;
+    var minute = DateTime.now().minute;
+
+    await FirebaseFirestore.instance.collection("Users").doc(widget.SchoolName).collection("Users").doc(widget.uid).
+    update({"Date":date,"Hour":hour,"Minute":minute,"NowLocation":"조기입실","SpecialComment":""});
+
+    setState(() {
+    });
+  }
+
 
   Future DeleteApply() async{
     await FirebaseFirestore.instance.collection("Users").doc(widget.SchoolName).collection("Users").doc(widget.uid).
@@ -196,8 +186,8 @@ class _MainPageState extends State<MainPage> {
                                 Icon(CupertinoIcons.check_mark,color: Colors.white,) : Icon(CupertinoIcons.xmark,color: Colors.white,),
                                 SizedBox(width: 5,),
                                 documents["Date"]==date ?
-                                Text("출석위치: ${documents["NowLocation"]}",style: TextStyle(fontSize: 20,color: Colors.white))
-                                    : Container(),
+                                Text("출석위치: ${documents["NowLocation"]}",style: TextStyle(fontSize: 20,color: Colors.white)) :
+                                Container(),
                               ],
                             ),
                             SizedBox(height: 5,),
@@ -225,44 +215,11 @@ class _MainPageState extends State<MainPage> {
                           }
 
                           if(documents["Date"] == date && documents["NowLocation"] == "조기입실"){
-                            showTopSnackBar(
-                              context,
-                              CustomSnackBar.error(
-                                message:
-                                "이미 조기입실 되었습니다.",
-                              ),
-                            );
+                            EarlyEnterCancle();
                             return;
                           }
 
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              // return object of type Dialog
-                              return AlertDialog(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.0)
-                                ),
-                                title: new Text("조기입실"),
-                                content: new Text("조기입실은 취소할 수 없습니다."),
-                                actions: <Widget>[
-                                  new FlatButton(
-                                    child: new Text("확인"),
-                                    onPressed: () {
-                                      EarlyEnter();
-                                      Navigator.pop(context);
-                                    },
-                                  ),
-                                  new FlatButton(
-                                    child: new Text("취소"),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          );
+                          EarlyEnter();
                         },
                         child: Container(
                           margin: EdgeInsets.symmetric(vertical: 5,horizontal: 5),
@@ -274,7 +231,7 @@ class _MainPageState extends State<MainPage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("조기입실",style:TextStyle(fontSize: 30)),
+                              Text("${documents["Date"] == date && documents["NowLocation"] == "조기입실" ? "조기입실" : "조기입실 취소"}",style:TextStyle(fontSize: 30)),
                               Icon(CupertinoIcons.check_mark)
                             ],
                           ),
@@ -309,7 +266,15 @@ class _MainPageState extends State<MainPage> {
                           setState(() {
                             NowRoom = "자습실";
                           });
-                          showPicker();
+
+                          switch(widget.SchoolName){
+                            case "경기북과학고등학교":
+                              GBSshowPicker();
+                              break;
+
+                            default:
+                              break;
+                          }
                         },
                         child: Container(
                           margin: EdgeInsets.symmetric(vertical: 5,horizontal: 5),
@@ -375,6 +340,7 @@ class _MainPageState extends State<MainPage> {
                         ),
                       ),
 
+                      /*
                       //특별실 신청
                       !(documents["ApplyDate"]==date) ?
                       GestureDetector(
@@ -512,6 +478,7 @@ class _MainPageState extends State<MainPage> {
                           ],
                         ),
                       ) : Container(),
+                       */
                     ],
                   ),
                 ),

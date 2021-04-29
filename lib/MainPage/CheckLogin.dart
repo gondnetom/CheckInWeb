@@ -34,15 +34,19 @@ class _CheckState extends State<Check> {
   }
 
   bool first = true;
-  var _currentPage = 0;
+  int _currentPage = 0;
   var subscription;
 
+  String uid;
   String SchoolName;
-  var uid;
   Future CheckStates() async{
     var list = Map();
 
-    //check wifi
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    SchoolName = await prefs.getString("SchoolName");
+    uid = await FirebaseAuth.instance.currentUser.uid;
+
+    //#regioncheck wifi
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.mobile) {
       list["Network"] = "모바일 연결됨";
@@ -52,12 +56,9 @@ class _CheckState extends State<Check> {
     }else{
       list["Network"] = "None";
     }
-
-    //check my id
+    //#endregion
+    //#regioncheck my id
     if(first && list["Network"] != "None"){
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      SchoolName = await prefs.getString("SchoolName");
-      uid = await FirebaseAuth.instance.currentUser.uid;
 
       final snapShot = await FirebaseFirestore.instance.collection("Users").doc(SchoolName).collection("Users").doc(uid).get();
       if (snapShot == null || !snapShot.exists) {
@@ -71,6 +72,7 @@ class _CheckState extends State<Check> {
         });
       }
     }
+    //#endregion
 
     return list;
   }
