@@ -60,7 +60,7 @@ class _MainPageState extends State<MainPage> with AutomaticKeepAliveClientMixin<
                       },
                       child: Padding(
                         padding: EdgeInsets.all(5),
-                        child: Text("Menu",style:TextStyle(fontSize: 25,color: Colors.black)),
+                        child: Text("Menu",style:TextStyle(fontSize: 25,color:currentPage == 0 ? Colors.blue:Colors.black)),
                       )
                     ),
                     GestureDetector(
@@ -71,7 +71,7 @@ class _MainPageState extends State<MainPage> with AutomaticKeepAliveClientMixin<
                       },
                       child: Padding(
                         padding: EdgeInsets.all(5),
-                        child: Text("Daily",style:TextStyle(fontSize: 25,color: Colors.black)),
+                        child: Text("Daily",style:TextStyle(fontSize: 25,color:currentPage == 1 ? Colors.blue:Colors.black)),
                       )
                     ),
                     GestureDetector(
@@ -82,7 +82,7 @@ class _MainPageState extends State<MainPage> with AutomaticKeepAliveClientMixin<
                       },
                       child: Padding(
                         padding: EdgeInsets.all(5),
-                        child: Text("Contents",style:TextStyle(fontSize: 25,color: Colors.black)),
+                        child: Text("Contents",style:TextStyle(fontSize: 25,color:currentPage == 2 ? Colors.blue:Colors.black)),
                       )
                     )
                   ],
