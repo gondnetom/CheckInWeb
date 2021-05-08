@@ -1,50 +1,37 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:connectivity/connectivity.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'MainMenu.dart';
-import 'Setting.dart';
 import 'Signup.dart';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Check extends StatefulWidget {
   @override
   _CheckState createState() => _CheckState();
 }
 class _CheckState extends State<Check> {
-  @override
-  initState() {
-    super.initState();
-    subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      setState(() {
-      });
-    });
-  }
-  @override
-  dispose() {
-    super.dispose();
-
-    subscription.cancel();
-  }
-
   bool first = true;
   int _currentPage = 0;
-  var subscription;
 
   String uid;
   String SchoolName;
   Future CheckStates() async{
     var list = Map();
 
+    uid = await FirebaseAuth.instance.currentUser.uid;
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
     SchoolName = await prefs.getString("SchoolName");
-    uid = await FirebaseAuth.instance.currentUser.uid;
+    if(SchoolName == ""){
+      await FirebaseAuth.instance.signOut();
+      return;
+    }
 
     //#regioncheck wifi
     var connectivityResult = await (Connectivity().checkConnectivity());
@@ -79,31 +66,26 @@ class _CheckState extends State<Check> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
-        title: Text("${_currentPage==0 ?"Menu":"SignUp"}",style:TextStyle(fontSize: 30,color: Colors.black)),
-      ),
-      body: FutureBuilder(
-          future: CheckStates(),
-          builder:(context,snapshot){
-            if(snapshot.hasData){
-              if(snapshot.data["Network"] == "None"){
-                return Center(child: Text("인터넷을 연결해주세요.",style: TextStyle(fontSize: 20,color: Colors.black),));
-              }else{
-                if(_currentPage==0)
-                  return MainPage(snapshot.data["Network"],SchoolName,uid);
-                else
-                  return SignUp(SchoolName,uid);
-              }
+    return FutureBuilder(
+        future: CheckStates(),
+        builder:(context,snapshot){
+          if(snapshot.hasData){
+            if(snapshot.data["Network"] == "None"){
+              return Scaffold(
+                body: Center(child: Text("인터넷을 연결해주세요.",style: TextStyle(fontSize: 20,color: Colors.black),)),
+              );
             }else{
-              return Center(child: CupertinoActivityIndicator());
+              if(_currentPage==0)
+                return MainPage(snapshot.data["Network"],SchoolName,uid);
+              else
+                return SignUp(SchoolName,uid);
             }
+          }else{
+            return Scaffold(
+              body: Center(child: CupertinoActivityIndicator()),
+            );
           }
-      ),
-      endDrawer: Drawer(
-        child: Setting(),
-      ),
+        }
     );
   }
 }
