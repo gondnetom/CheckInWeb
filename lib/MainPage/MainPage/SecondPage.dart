@@ -36,8 +36,12 @@ Future getTimeTable(int Grade,int Class,String SchoolName) async {
       response = await http.get(Addr);//필요 api 호출
       Data = json.decode(response.body);//받은 정보를 json형태로 decode
       //받은 데이터정보를 필요한 형태로 저장한다.
-      for(int j =0; j<Data["hisTimetable"][1]["row"].length; j++){
-        Timelist["${i==0 ? "ToDay":"Tomorrow"}${j}"] = Data["hisTimetable"][1]["row"][j]["ITRT_CNTNT"];
+      if(Data.containsKey("RESULT")){
+
+      }else{
+        for(int j =0; j< Data["hisTimetable"][1]["row"].length; j++){//받은 데이터정보를 필요한 형태로 저장한다.
+          Timelist["${i==0 ? "ToDay":"Tomorrow"}${j}"] = Data["hisTimetable"][1]["row"][j]["ITRT_CNTNT"];
+        }
       }
     }
   } catch (e) {
