@@ -3,6 +3,18 @@
 This is a dormitory management application in GBSHS
 - [Website](https://checkingbs.codemagic.app)
 
+Main
+![a1](https://user-images.githubusercontent.com/77566805/147450812-b452c350-1e6e-49be-ba8b-dcc125812406.png)
+
+Time Table
+![a2](https://user-images.githubusercontent.com/77566805/147450817-63b94a31-326d-41c6-a0c5-6ee3b2d3024a.png)
+
+Contents
+![a3](https://user-images.githubusercontent.com/77566805/147450820-80b1a33a-87ab-471e-aba6-683c3c181f6d.png)
+
+Setting
+![a4](https://user-images.githubusercontent.com/77566805/147450821-7cf7252a-98e0-45b6-9be8-138274013ee5.png)
+
 ## Support Url
 If you want to call me This is a Support Url
 
