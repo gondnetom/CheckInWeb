@@ -1,4 +1,4 @@
-# checkschool WEB
+# CheckIn WEB
 
 This is a dormitory management application in GBSHS. Web Version
 
@@ -18,8 +18,8 @@ This is a dormitory management application in GBSHS. Web Version
 
 <img src = "https://user-images.githubusercontent.com/77566805/147450821-7cf7252a-98e0-45b6-9be8-138274013ee5.png" width="50%" height="50%">
 
-## Support Url
-If you want to call me This is a Support Url
+## Support URL
+If you want to call me This is a Support URL
 
 - [Website](https://checkingbs.codemagic.app)
 - [privacy](https://github.com/gondnetom/FrenchVocaPrivacyPolicy)
