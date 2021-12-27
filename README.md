@@ -4,7 +4,7 @@ This is a dormitory management application in GBSHS
 - [Website](https://checkingbs.codemagic.app)
 
 Main
-![a1](https://user-images.githubusercontent.com/77566805/147450812-b452c350-1e6e-49be-ba8b-dcc125812406.png)
+<img src = "https://user-images.githubusercontent.com/77566805/147450812-b452c350-1e6e-49be-ba8b-dcc125812406.png" width="50%" height="50%">
 
 Time Table
 ![a2](https://user-images.githubusercontent.com/77566805/147450817-63b94a31-326d-41c6-a0c5-6ee3b2d3024a.png)
