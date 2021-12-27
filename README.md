@@ -1,6 +1,6 @@
-# checkschool
+# checkschool WEB
 
-This is a dormitory management application in GBSHS
+This is a dormitory management application in GBSHS. Web Version
 
 - Main
 
