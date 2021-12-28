@@ -1,7 +1,6 @@
 # CheckIn WEB
 
-This is a dormitory management application in GBSHS. Web Version
-- [Website](https://checkingbs.codemagic.app)
+This is a dormitory management application in GBSHS. Web Version [Website](https://checkingbs.codemagic.app)
 
 - Main
 
