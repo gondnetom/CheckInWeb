@@ -24,3 +24,6 @@ If you want to call me This is a Support URL
 - [Website](https://checkingbs.codemagic.app)
 - [privacy](https://github.com/gondnetom/FrenchVocaPrivacyPolicy)
 - [support](https://sites.google.com/view/checkingbs/%ED%99%88)
+
+### Author
+Mortem4
